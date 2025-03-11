@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import config from "./config";
 
 function App() {
   const [city, setCity] = useState<string>("");
@@ -14,10 +15,10 @@ function App() {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7103/weather?city=${city}&country=${country}`,
+        `${config.baseUrl}/weather?city=${city}&country=${country}`,
         {
           headers: {
-            apiKey: "API_KEY_1",
+            apiKey: config.apiKey,
           },
         }
       );
