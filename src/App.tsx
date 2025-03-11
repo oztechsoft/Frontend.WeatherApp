@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-  const [weather, setWeather] = useState(null);
+  const [city, setCity] = useState<string>("");
+  const [country, setCountry] = useState<string>("");
+  const [weather, setWeather] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const fetchWeather = async () => {
     setError(null);
     setWeather(null);
-
+    setLoading(true);
     try {
       const response = await fetch(
         `https://localhost:7103/weather?city=${city}&country=${country}`,
@@ -20,7 +21,6 @@ function App() {
           },
         }
       );
-
       if (response.ok) {
         const data = await response.json();
         setWeather(data.description);
@@ -30,6 +30,8 @@ function App() {
       }
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -50,6 +52,7 @@ function App() {
       />
       <button onClick={fetchWeather}>Get Weather</button>
 
+      {loading && <p>Loading...</p>}
       {weather && <p>Weather: {weather}</p>}
       {error && <p>Error: {error}</p>}
     </div>
