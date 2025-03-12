@@ -12,6 +12,12 @@ function App() {
   const fetchWeather = async () => {
     setError(null);
     setWeather(null);
+
+    if (!city || !country) {
+      setError("City and Country are required");
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await fetch(
@@ -30,7 +36,7 @@ function App() {
         setError(data || "Failed to fetch weather");
       }
     } catch (err) {
-      setError(err.message);
+      setError((err as Error).message);
     } finally {
       setLoading(false);
     }
