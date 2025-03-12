@@ -32,3 +32,13 @@ Modify the baseUrl property in config.ts based on your local backend endpoint or
    yarn dev
    ```
 2. Open your browser and navigate to http://localhost:5173 to see the application.
+
+### Testing
+
+1. Run the tests:
+   ```sh
+   npm run test
+   # or
+   yarn test
+   ```
+2. The tests will be executed using Jest and React Testing Library. Ensure you have the necessary configuration files (jest.config.js, babel.config.js, and setupTests.ts) in place.
